@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Forecast App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Employee Compensation Forecast</h1>
+
+    <div class="filters">
+        <label>Role:
+            <select id="roleFilter"></select>
+        </label>
+        <label>Location:
+            <select id="locationFilter"></select>
+        </label>
+        <label>
+            <input type="checkbox" id="showInactive"> Show Inactive Employees
+        </label>
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <div id="employeeList"></div>
+    <h2>Employee Experience Grouping</h2>
+    <div id="experienceGrouping"></div>
+    <h2>Compensation by Location</h2>
+<canvas id="locationChart" width="400" height="200"></canvas>
+
+<h2>Employees by Experience Range</h2>
+<canvas id="experienceChart" width="400" height="200"></canvas>
+
+
+    <div class="increment">
+    <h3>Simulate Compensation Increment (%)</h3>
+    <input type="number" id="incrementValue" placeholder="Enter %">
+    <button onclick="simulateIncrement()">Apply Increment</button>
+</div>
+
+    <button onclick="downloadCSV()">Download CSV</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
