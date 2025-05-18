@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+h1 {
+    color: #343a40;
+}
+
+.filters, .increment {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+#employeeList div {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
