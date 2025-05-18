@@ -1,0 +1,30 @@
+DELIMITER //
+
+//GetFilteredCompGap
+CREATE PROCEDURE GetFilteredCompGap(
+    IN input_role VARCHAR(100),
+    IN input_location VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        ed.emp_id,
+        ed.name,
+        ed.role,
+        ed.location,
+        ed.years_of_experience,
+        ed.current_compensation,
+        ed.is_active,
+        COALESCE(er.self_rating, 0) AS self_rating,
+        COALESCE(er.manager_rating, 0) AS manager_rating,
+        COALESCE(ic.average_industry_compensation, 0) AS average_industry_compensation,
+        (ed.current_compensation - COALESCE(ic.average_industry_compensation, 0)) AS compensation_gap
+    FROM employees_data ed
+    LEFT JOIN employee_rating er ON ed.emp_id = er.emp_id
+    LEFT JOIN industry_compensation ic ON ed.role = ic.role AND ed.location = ic.location
+    WHERE (ed.is_active IN ('Y','N'))
+      AND (input_role IS NULL OR ed.role = input_role)
+      AND (input_location IS NULL OR ed.location = input_location)
+    ORDER BY ed.emp_id ASC;
+END //
+
+DELIMITER ;
