@@ -1,0 +1,31 @@
+TYPE=VIEW
+query=select `ed`.`emp_id` AS `emp_id`,`ed`.`name` AS `name`,`ed`.`role` AS `role`,`ed`.`location` AS `location`,`ed`.`years_of_experience` AS `years_of_experience`,`ed`.`current_compensation` AS `current_compensation`,coalesce(`er`.`self_rating`,0) AS `self_rating`,coalesce(`er`.`manager_rating`,0) AS `manager_rating`,coalesce(`ic`.`average_industry_compensation`,0) AS `average_industry_compensation`,`ed`.`current_compensation` - coalesce(`ic`.`average_industry_compensation`,0) AS `compensation_gap`,`ed`.`is_active` AS `is_active` from ((`employee_forecasting`.`employees_data` `ed` left join `employee_forecasting`.`employee_rating` `er` on(`ed`.`emp_id` = `er`.`emp_id`)) left join `employee_forecasting`.`industry_compensation` `ic` on(`ed`.`role` = `ic`.`role` and `ed`.`location` = `ic`.`location`)) order by `ed`.`emp_id`
+md5=ac01b72c22623c3a359e24b60f07f0b3
+updatable=0
+algorithm=0
+definer_user=root
+definer_host=localhost
+suid=1
+with_check_option=0
+timestamp=0001747546061323465
+create-version=2
+source=SELECT 
+\n    ed.emp_id,
+\n    ed.name,
+\n    ed.role,
+\n    ed.location,
+\n    ed.years_of_experience,
+\n    ed.current_compensation,
+\n    COALESCE(er.self_rating, 0) AS self_rating,
+\n    COALESCE(er.manager_rating, 0) AS manager_rating,
+\n    COALESCE(ic.average_industry_compensation, 0) AS average_industry_compensation,
+\n    (ed.current_compensation - COALESCE(ic.average_industry_compensation, 0)) AS compensation_gap,
+\n    ed.is_active
+\nFROM employees_data ed
+\nLEFT JOIN employee_rating er ON ed.emp_id = er.emp_id
+\nLEFT JOIN industry_compensation ic ON ed.role = ic.role AND ed.location = ic.location
+\nORDER BY ed.emp_id
+client_cs_name=utf8mb4
+connection_cl_name=utf8mb4_unicode_ci
+view_body_utf8=select `ed`.`emp_id` AS `emp_id`,`ed`.`name` AS `name`,`ed`.`role` AS `role`,`ed`.`location` AS `location`,`ed`.`years_of_experience` AS `years_of_experience`,`ed`.`current_compensation` AS `current_compensation`,coalesce(`er`.`self_rating`,0) AS `self_rating`,coalesce(`er`.`manager_rating`,0) AS `manager_rating`,coalesce(`ic`.`average_industry_compensation`,0) AS `average_industry_compensation`,`ed`.`current_compensation` - coalesce(`ic`.`average_industry_compensation`,0) AS `compensation_gap`,`ed`.`is_active` AS `is_active` from ((`employee_forecasting`.`employees_data` `ed` left join `employee_forecasting`.`employee_rating` `er` on(`ed`.`emp_id` = `er`.`emp_id`)) left join `employee_forecasting`.`industry_compensation` `ic` on(`ed`.`role` = `ic`.`role` and `ed`.`location` = `ic`.`location`)) order by `ed`.`emp_id`
+mariadb-version=100432
